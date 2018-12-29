@@ -104,5 +104,30 @@
   <script type="text/javascript" src="js/directives_mobile.js"></script>
   <!-- endbuild -->
 
+  <script>
+    try {
+      var queryDict = {}
+      location.search.substr(1).split("&").forEach(function(item) {queryDict[item.split("=")[0]] = item.split("=")[1]})
+      if (!queryDict.gotData) {
+        var data = JSON.parse(decodeURIComponent(queryDict.localStorage))
+        for (var key of Object.keys(data)) {
+          localStorage.setItem(key, data[key])
+        }
+        location.href = location.href + "&gotData=1"
+      }
+    } catch (e) {
+      alert(e)
+    }
+  </script>
+  <style>
+    .im_attach, .im_media_attach, .im_record, .media_modal_action_btn_download {
+      display: none!important;
+    }
+    .im_send_field_wrap {
+      margin-right: 17px;
+      margin-left: 8px;
+    }
+  </style>
+
 </body>
 </html>
